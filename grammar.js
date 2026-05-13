@@ -8,7 +8,7 @@ module.exports = grammar({
   rules: {
     source_file: ($) => repeat($._statement),
 
-    _statement: ($) => choice($.select_statement, $._expression),
+    _statement: ($) => choice($.select_statement, $.journal_statement, $.balances_statement, $.print_statement, $._expression),
 
     _expression: ($) => choice(
       $.or_expression,
@@ -191,6 +191,38 @@ module.exports = grammar({
     keyword_desc: (_) => token(prec(1, /[Dd][Ee][Ss][Cc]/)),
 
     keyword_limit: (_) => token(prec(1, /[Ll][Ii][Mm][Ii][Tt]/)),
+
+    journal_statement: ($) =>
+      prec.right(seq(
+        $.keyword_journal,
+        optional(field("account_regexp", $.string)),
+        optional(seq($.keyword_at, field("at", choice($.function_call, $.identifier)))),
+        optional(field("from", $.from_clause)),
+        optional($.semicolon),
+      )),
+
+    balances_statement: ($) =>
+      seq(
+        $.keyword_balances,
+        optional(seq($.keyword_at, field("at", choice($.function_call, $.identifier)))),
+        optional(field("from", $.from_clause)),
+        optional($.semicolon),
+      ),
+
+    print_statement: ($) =>
+      seq(
+        $.keyword_print,
+        optional(field("from", $.from_clause)),
+        optional($.semicolon),
+      ),
+
+    keyword_journal: (_) => token(prec(1, /[Jj][Oo][Uu][Rr][Nn][Aa][Ll]/)),
+
+    keyword_balances: (_) => token(prec(1, /[Bb][Aa][Ll][Aa][Nn][Cc][Ee][Ss]/)),
+
+    keyword_print: (_) => token(prec(1, /[Pp][Rr][Ii][Nn][Tt]/)),
+
+    keyword_at: (_) => token(prec(1, /[Aa][Tt]/)),
 
     semicolon: (_) => ";",
 

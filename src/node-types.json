@@ -138,6 +138,54 @@
     }
   },
   {
+    "type": "balances_statement",
+    "named": true,
+    "fields": {
+      "at": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "from": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "from_clause",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_at",
+          "named": true
+        },
+        {
+          "type": "keyword_balances",
+          "named": true
+        },
+        {
+          "type": "semicolon",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_expression",
     "named": true,
     "fields": {
@@ -652,6 +700,64 @@
     }
   },
   {
+    "type": "journal_statement",
+    "named": true,
+    "fields": {
+      "account_regexp": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "at": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "from": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "from_clause",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_at",
+          "named": true
+        },
+        {
+          "type": "keyword_journal",
+          "named": true
+        },
+        {
+          "type": "semicolon",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "limit_clause",
     "named": true,
     "fields": {},
@@ -1019,6 +1125,36 @@
     }
   },
   {
+    "type": "print_statement",
+    "named": true,
+    "fields": {
+      "from": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "from_clause",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_print",
+          "named": true
+        },
+        {
+          "type": "semicolon",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "regex_expression",
     "named": true,
     "fields": {
@@ -1242,6 +1378,10 @@
           "named": true
         },
         {
+          "type": "balances_statement",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
@@ -1274,6 +1414,10 @@
           "named": true
         },
         {
+          "type": "journal_statement",
+          "named": true
+        },
+        {
           "type": "null",
           "named": true
         },
@@ -1283,6 +1427,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "print_statement",
           "named": true
         },
         {
@@ -1536,6 +1684,14 @@
     "named": true
   },
   {
+    "type": "keyword_at",
+    "named": true
+  },
+  {
+    "type": "keyword_balances",
+    "named": true
+  },
+  {
     "type": "keyword_by",
     "named": true
   },
@@ -1564,6 +1720,10 @@
     "named": true
   },
   {
+    "type": "keyword_journal",
+    "named": true
+  },
+  {
     "type": "keyword_limit",
     "named": true
   },
@@ -1577,6 +1737,10 @@
   },
   {
     "type": "keyword_order",
+    "named": true
+  },
+  {
+    "type": "keyword_print",
     "named": true
   },
   {
