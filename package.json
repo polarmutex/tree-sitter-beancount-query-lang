@@ -1,0 +1,53 @@
+{
+  "name": "tree-sitter-bql",
+  "version": "0.1.0",
+  "description": "a tree-sitter parser for the Beancount Query Language (BQL)",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "scripts": {
+    "build": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "keywords": [
+    "tree-sitter",
+    "bql",
+    "beancount"
+  ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "author": "Brian Ryall",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^8.7.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.26.8"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.bql",
+      "injection-regex": "^bql$"
+    }
+  ]
+}

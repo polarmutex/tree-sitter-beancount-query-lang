@@ -1,0 +1,16 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "metadata": {
+    "description": "Tree-sitter grammar for the Beancount Query Language (BQL)",
+    "version": "0.1.0",
+    "links": {
+      "repository": "https://github.com/polarmutex/tree-sitter-beancount-query-lang"
+    }
+  },
+  "grammars": [
+    {
+      "name": "bql",
+      "scope": "source.bql"
+    }
+  ]
+}
