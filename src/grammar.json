@@ -460,6 +460,22 @@
           "members": [
             {
               "type": "FIELD",
+              "name": "from",
+              "content": {
+                "type": "SYMBOL",
+                "name": "from_clause"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
               "name": "where",
               "content": {
                 "type": "SYMBOL",
@@ -484,6 +500,131 @@
           ]
         }
       ]
+    },
+    "from_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_from"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "filter",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_expression"
+                  }
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "FIELD",
+                    "name": "operators",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_statement_operator"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "FIELD",
+                "name": "operators",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_statement_operator"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "_statement_operator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "open_clause"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "close_clause"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "clear_clause"
+        }
+      ]
+    },
+    "open_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_on"
+        },
+        {
+          "type": "FIELD",
+          "name": "date",
+          "content": {
+            "type": "SYMBOL",
+            "name": "date"
+          }
+        }
+      ]
+    },
+    "close_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_close"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "keyword_on"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "date",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "date"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "clear_clause": {
+      "type": "SYMBOL",
+      "name": "keyword_clear"
     },
     "select_targets": {
       "type": "SEQ",
@@ -542,6 +683,61 @@
     "keyword_where": {
       "type": "PATTERN",
       "value": "[Ww][Hh][Ee][Rr][Ee]"
+    },
+    "keyword_from": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[Ff][Rr][Oo][Mm]"
+        }
+      }
+    },
+    "keyword_open": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[Oo][Pp][Ee][Nn]"
+        }
+      }
+    },
+    "keyword_close": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[Cc][Ll][Oo][Ss][Ee]"
+        }
+      }
+    },
+    "keyword_clear": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[Cc][Ll][Ee][Aa][Rr]"
+        }
+      }
+    },
+    "keyword_on": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[Oo][Nn]"
+        }
+      }
     },
     "semicolon": {
       "type": "STRING",

@@ -89,9 +89,41 @@ module.exports = grammar({
         $.keyword_select,
         optional(field("distinct", $.keyword_distinct)),
         field("targets", $.select_targets),
+        optional(field("from", $.from_clause)),
         optional(field("where", $.where_clause)),
         optional($.semicolon),
       ),
+
+    from_clause: ($) =>
+      seq(
+        $.keyword_from,
+        choice(
+          seq(
+            field("filter", $._expression),
+            repeat(field("operators", $._statement_operator)),
+          ),
+          repeat1(field("operators", $._statement_operator)),
+        ),
+      ),
+
+    _statement_operator: ($) => choice(
+      $.open_clause,
+      $.close_clause,
+      $.clear_clause,
+    ),
+
+    open_clause: ($) => seq(
+      $.keyword_open,
+      $.keyword_on,
+      field("date", $.date),
+    ),
+
+    close_clause: ($) => seq(
+      $.keyword_close,
+      optional(seq($.keyword_on, field("date", $.date))),
+    ),
+
+    clear_clause: ($) => $.keyword_clear,
 
     select_targets: ($) =>
       seq(
@@ -108,6 +140,16 @@ module.exports = grammar({
     keyword_distinct: (_) => /[Dd][Ii][Ss][Tt][Ii][Nn][Cc][Tt]/,
 
     keyword_where: (_) => /[Ww][Hh][Ee][Rr][Ee]/,
+
+    keyword_from: (_) => token(prec(1, /[Ff][Rr][Oo][Mm]/)),
+
+    keyword_open: (_) => token(prec(1, /[Oo][Pp][Ee][Nn]/)),
+
+    keyword_close: (_) => token(prec(1, /[Cc][Ll][Oo][Ss][Ee]/)),
+
+    keyword_clear: (_) => token(prec(1, /[Cc][Ll][Ee][Aa][Rr]/)),
+
+    keyword_on: (_) => token(prec(1, /[Oo][Nn]/)),
 
     semicolon: (_) => ";",
 

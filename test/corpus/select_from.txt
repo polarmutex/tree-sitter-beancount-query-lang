@@ -1,0 +1,149 @@
+================================================================================
+FROM with CLEAR operator
+================================================================================
+SELECT * FROM CLEAR
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))
+    from: (from_clause
+      (keyword_from)
+      operators: (clear_clause
+        (keyword_clear)))))
+
+================================================================================
+FROM with bare CLOSE operator
+================================================================================
+SELECT * FROM CLOSE
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))
+    from: (from_clause
+      (keyword_from)
+      operators: (close_clause
+        (keyword_close)))))
+
+================================================================================
+FROM with CLOSE ON date
+================================================================================
+SELECT * FROM CLOSE ON 2024-12-31
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))
+    from: (from_clause
+      (keyword_from)
+      operators: (close_clause
+        (keyword_close)
+        (keyword_on)
+        date: (date)))))
+
+================================================================================
+FROM with OPEN ON date
+================================================================================
+SELECT * FROM OPEN ON 2024-01-01
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))
+    from: (from_clause
+      (keyword_from)
+      operators: (open_clause
+        (keyword_open)
+        (keyword_on)
+        date: (date)))))
+
+================================================================================
+FROM with filter only
+================================================================================
+SELECT * FROM has_account("Assets")
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))
+    from: (from_clause
+      (keyword_from)
+      filter: (function_call
+        name: (identifier)
+        arguments: (string)))))
+
+================================================================================
+FROM with multiple operators
+================================================================================
+SELECT * FROM OPEN ON 2024-01-01 CLOSE ON 2024-12-31 CLEAR
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))
+    from: (from_clause
+      (keyword_from)
+      operators: (open_clause
+        (keyword_open)
+        (keyword_on)
+        date: (date))
+      operators: (close_clause
+        (keyword_close)
+        (keyword_on)
+        date: (date))
+      operators: (clear_clause
+        (keyword_clear)))))
+
+================================================================================
+FROM with filter and operators
+================================================================================
+SELECT * FROM has_account("Assets") OPEN ON 2024-01-01 CLOSE
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))
+    from: (from_clause
+      (keyword_from)
+      filter: (function_call
+        name: (identifier)
+        arguments: (string))
+      operators: (open_clause
+        (keyword_open)
+        (keyword_on)
+        date: (date))
+      operators: (close_clause
+        (keyword_close)))))
+
+================================================================================
+SELECT with FROM clause
+================================================================================
+SELECT account FROM OPEN ON 2024-01-01
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier)))
+    from: (from_clause
+      (keyword_from)
+      operators: (open_clause
+        (keyword_open)
+        (keyword_on)
+        date: (date)))))
