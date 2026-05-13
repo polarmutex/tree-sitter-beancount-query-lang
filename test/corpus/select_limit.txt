@@ -1,0 +1,14 @@
+================================================================================
+SELECT with LIMIT clause
+================================================================================
+SELECT account LIMIT 10
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier)))
+    limit: (limit_clause
+      (keyword_limit)
+      (integer))))

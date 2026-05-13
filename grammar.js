@@ -91,7 +91,36 @@ module.exports = grammar({
         field("targets", $.select_targets),
         optional(field("from", $.from_clause)),
         optional(field("where", $.where_clause)),
+        optional(field("group_by", $.group_by_clause)),
+        optional(field("order_by", $.order_by_clause)),
+        optional(field("limit", $.limit_clause)),
         optional($.semicolon),
+      ),
+
+    limit_clause: ($) => seq($.keyword_limit, $.integer),
+
+    group_by_clause: ($) =>
+      seq(
+        $.keyword_group,
+        $.keyword_by,
+        $.group_by_term,
+        repeat(seq(",", $.group_by_term)),
+      ),
+
+    group_by_term: ($) => choice($.integer, $.identifier),
+
+    order_by_clause: ($) =>
+      seq(
+        $.keyword_order,
+        $.keyword_by,
+        $.order_by_term,
+        repeat(seq(",", $.order_by_term)),
+      ),
+
+    order_by_term: ($) =>
+      seq(
+        $._expression,
+        optional(field("direction", choice($.keyword_asc, $.keyword_desc))),
       ),
 
     from_clause: ($) =>
@@ -150,6 +179,18 @@ module.exports = grammar({
     keyword_clear: (_) => token(prec(1, /[Cc][Ll][Ee][Aa][Rr]/)),
 
     keyword_on: (_) => token(prec(1, /[Oo][Nn]/)),
+
+    keyword_group: (_) => token(prec(1, /[Gg][Rr][Oo][Uu][Pp]/)),
+
+    keyword_order: (_) => token(prec(1, /[Oo][Rr][Dd][Ee][Rr]/)),
+
+    keyword_by: (_) => token(prec(1, /[Bb][Yy]/)),
+
+    keyword_asc: (_) => token(prec(1, /[Aa][Ss][Cc]/)),
+
+    keyword_desc: (_) => token(prec(1, /[Dd][Ee][Ss][Cc]/)),
+
+    keyword_limit: (_) => token(prec(1, /[Ll][Ii][Mm][Ii][Tt]/)),
 
     semicolon: (_) => ";",
 

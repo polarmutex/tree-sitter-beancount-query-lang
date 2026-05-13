@@ -1,0 +1,62 @@
+================================================================================
+SELECT with GROUP BY positional
+================================================================================
+SELECT account, payee GROUP BY 1, 2
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier))
+      (select_target
+        (identifier)))
+    group_by: (group_by_clause
+      (keyword_group)
+      (keyword_by)
+      (group_by_term
+        (integer))
+      (group_by_term
+        (integer)))))
+
+================================================================================
+SELECT with GROUP BY named
+================================================================================
+SELECT account, payee GROUP BY account, payee
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier))
+      (select_target
+        (identifier)))
+    group_by: (group_by_clause
+      (keyword_group)
+      (keyword_by)
+      (group_by_term
+        (identifier))
+      (group_by_term
+        (identifier)))))
+
+================================================================================
+SELECT with GROUP BY mixed
+================================================================================
+SELECT account, payee GROUP BY account, 2
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier))
+      (select_target
+        (identifier)))
+    group_by: (group_by_clause
+      (keyword_group)
+      (keyword_by)
+      (group_by_term
+        (identifier))
+      (group_by_term
+        (integer)))))

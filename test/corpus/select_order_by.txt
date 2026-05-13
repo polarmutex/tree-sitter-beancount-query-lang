@@ -1,0 +1,39 @@
+================================================================================
+SELECT with ORDER BY single no direction
+================================================================================
+SELECT account ORDER BY account
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier)))
+    order_by: (order_by_clause
+      (keyword_order)
+      (keyword_by)
+      (order_by_term
+        (identifier)))))
+
+================================================================================
+SELECT with ORDER BY multi-column mixed direction
+================================================================================
+SELECT account, payee ORDER BY account ASC, payee DESC
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier))
+      (select_target
+        (identifier)))
+    order_by: (order_by_clause
+      (keyword_order)
+      (keyword_by)
+      (order_by_term
+        (identifier)
+        direction: (keyword_asc))
+      (order_by_term
+        (identifier)
+        direction: (keyword_desc)))))
