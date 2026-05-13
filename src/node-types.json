@@ -281,21 +281,6 @@
     "fields": {}
   },
   {
-    "type": "column_name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "function_call",
     "named": true,
     "fields": {
@@ -773,9 +758,59 @@
   {
     "type": "select_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "distinct": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "keyword_distinct",
+            "named": true
+          }
+        ]
+      },
+      "targets": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "select_targets",
+            "named": true
+          }
+        ]
+      },
+      "where": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "where_clause",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_select",
+          "named": true
+        },
+        {
+          "type": "semicolon",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_target",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -783,11 +818,26 @@
           "named": true
         },
         {
-          "type": "column_name",
+          "type": "function_call",
           "named": true
         },
         {
-          "type": "keyword_select",
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_targets",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "select_target",
           "named": true
         }
       ]
@@ -942,6 +992,81 @@
     }
   },
   {
+    "type": "where_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "and_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "in_expression",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "keyword_where",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "or_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "regex_expression",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "!=",
     "named": false
   },
@@ -1022,11 +1147,23 @@
     "named": true
   },
   {
+    "type": "keyword_distinct",
+    "named": true
+  },
+  {
     "type": "keyword_select",
     "named": true
   },
   {
+    "type": "keyword_where",
+    "named": true
+  },
+  {
     "type": "null",
+    "named": true
+  },
+  {
+    "type": "semicolon",
     "named": true
   },
   {

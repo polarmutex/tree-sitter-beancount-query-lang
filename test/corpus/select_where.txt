@@ -1,0 +1,16 @@
+================================================================================
+SELECT with WHERE clause
+================================================================================
+SELECT account WHERE account ~ "Assets"
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier)))
+    where: (where_clause
+      (keyword_where)
+      (regex_expression
+        left: (identifier)
+        right: (string)))))

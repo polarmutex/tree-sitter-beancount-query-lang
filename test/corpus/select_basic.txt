@@ -1,0 +1,50 @@
+================================================================================
+SELECT single column
+================================================================================
+SELECT account
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier)))))
+
+================================================================================
+SELECT wildcard
+================================================================================
+SELECT *
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (asterisk)))))
+
+================================================================================
+SELECT multi-column
+================================================================================
+SELECT account, payee
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier))
+      (select_target
+        (identifier)))))
+
+================================================================================
+SELECT DISTINCT
+================================================================================
+SELECT DISTINCT account
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    distinct: (keyword_distinct)
+    targets: (select_targets
+      (select_target
+        (identifier)))))

@@ -1,0 +1,13 @@
+================================================================================
+SELECT function call target
+================================================================================
+SELECT SUM(position)
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (function_call
+          name: (identifier)
+          arguments: (identifier))))))

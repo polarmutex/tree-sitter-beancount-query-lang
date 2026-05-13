@@ -1,0 +1,12 @@
+================================================================================
+SELECT with trailing semicolon
+================================================================================
+SELECT account;
+--------------------------------------------------------------------------------
+(source_file
+  (select_statement
+    (keyword_select)
+    targets: (select_targets
+      (select_target
+        (identifier)))
+    (semicolon)))

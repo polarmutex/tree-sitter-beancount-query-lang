@@ -87,16 +87,31 @@ module.exports = grammar({
     select_statement: ($) =>
       seq(
         $.keyword_select,
-        $._select_list,
+        optional(field("distinct", $.keyword_distinct)),
+        field("targets", $.select_targets),
+        optional(field("where", $.where_clause)),
+        optional($.semicolon),
       ),
 
-    _select_list: ($) => choice($.asterisk, seq($.column_name, repeat(seq(",", $.column_name)))),
+    select_targets: ($) =>
+      seq(
+        $.select_target,
+        repeat(seq(",", $.select_target)),
+      ),
+
+    select_target: ($) => choice($.asterisk, $.function_call, $.identifier),
 
     asterisk: (_) => "*",
 
-    column_name: ($) => $.identifier,
-
     keyword_select: (_) => /[Ss][Ee][Ll][Ee][Cc][Tt]/,
+
+    keyword_distinct: (_) => /[Dd][Ii][Ss][Tt][Ii][Nn][Cc][Tt]/,
+
+    keyword_where: (_) => /[Ww][Hh][Ee][Rr][Ee]/,
+
+    semicolon: (_) => ";",
+
+    where_clause: ($) => seq($.keyword_where, $._expression),
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
   },
