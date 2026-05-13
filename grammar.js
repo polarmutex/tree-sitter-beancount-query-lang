@@ -6,7 +6,21 @@ module.exports = grammar({
   rules: {
     source_file: ($) => repeat($._statement),
 
-    _statement: ($) => $.select_statement,
+    _statement: ($) => choice($.select_statement, $._literal),
+
+    _literal: ($) => choice($.string, $.date, $.decimal, $.integer, $.boolean, $.null),
+
+    string: (_) => /\"[^\"]*\"/,
+
+    date: (_) => /\d{4}-\d{2}-\d{2}/,
+
+    decimal: (_) => /\d+\.\d+/,
+
+    integer: (_) => /\d+/,
+
+    boolean: (_) => choice("TRUE", "FALSE"),
+
+    null: (_) => "NULL",
 
     select_statement: ($) =>
       seq(
