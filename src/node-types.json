@@ -374,6 +374,44 @@
     }
   },
   {
+    "type": "explain_statement",
+    "named": true,
+    "fields": {
+      "statement": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "balances_statement",
+            "named": true
+          },
+          {
+            "type": "journal_statement",
+            "named": true
+          },
+          {
+            "type": "print_statement",
+            "named": true
+          },
+          {
+            "type": "select_statement",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_explain",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "from_clause",
     "named": true,
     "fields": {
@@ -1398,6 +1436,10 @@
           "named": true
         },
         {
+          "type": "explain_statement",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -1709,6 +1751,10 @@
   },
   {
     "type": "keyword_distinct",
+    "named": true
+  },
+  {
+    "type": "keyword_explain",
     "named": true
   },
   {

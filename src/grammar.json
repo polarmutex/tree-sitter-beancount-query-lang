@@ -31,6 +31,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "explain_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_expression"
         }
       ]
@@ -1189,6 +1193,51 @@
           ]
         }
       ]
+    },
+    "explain_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_explain"
+        },
+        {
+          "type": "FIELD",
+          "name": "statement",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "select_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "journal_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "balances_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "print_statement"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "keyword_explain": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[Ee][Xx][Pp][Ll][Aa][Ii][Nn]"
+        }
+      }
     },
     "keyword_journal": {
       "type": "TOKEN",

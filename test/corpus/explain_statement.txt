@@ -1,0 +1,67 @@
+================================================================================
+EXPLAIN with SELECT
+================================================================================
+EXPLAIN SELECT account
+--------------------------------------------------------------------------------
+(source_file
+  (explain_statement
+    (keyword_explain)
+    statement: (select_statement
+      (keyword_select)
+      targets: (select_targets
+        (select_target
+          (identifier))))))
+
+================================================================================
+EXPLAIN with JOURNAL
+================================================================================
+EXPLAIN JOURNAL
+--------------------------------------------------------------------------------
+(source_file
+  (explain_statement
+    (keyword_explain)
+    statement: (journal_statement
+      (keyword_journal))))
+
+================================================================================
+EXPLAIN with BALANCES
+================================================================================
+EXPLAIN BALANCES AT cost
+--------------------------------------------------------------------------------
+(source_file
+  (explain_statement
+    (keyword_explain)
+    statement: (balances_statement
+      (keyword_balances)
+      (keyword_at)
+      at: (identifier))))
+
+================================================================================
+EXPLAIN with PRINT
+================================================================================
+EXPLAIN PRINT FROM CLEAR
+--------------------------------------------------------------------------------
+(source_file
+  (explain_statement
+    (keyword_explain)
+    statement: (print_statement
+      (keyword_print)
+      from: (from_clause
+        (keyword_from)
+        operators: (clear_clause
+          (keyword_clear))))))
+
+================================================================================
+EXPLAIN with trailing semicolon
+================================================================================
+EXPLAIN SELECT account;
+--------------------------------------------------------------------------------
+(source_file
+  (explain_statement
+    (keyword_explain)
+    statement: (select_statement
+      (keyword_select)
+      targets: (select_targets
+        (select_target
+          (identifier)))
+      (semicolon))))

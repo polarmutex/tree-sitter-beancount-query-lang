@@ -8,7 +8,7 @@ module.exports = grammar({
   rules: {
     source_file: ($) => repeat($._statement),
 
-    _statement: ($) => choice($.select_statement, $.journal_statement, $.balances_statement, $.print_statement, $._expression),
+    _statement: ($) => choice($.select_statement, $.journal_statement, $.balances_statement, $.print_statement, $.explain_statement, $._expression),
 
     _expression: ($) => choice(
       $.or_expression,
@@ -215,6 +215,19 @@ module.exports = grammar({
         optional(field("from", $.from_clause)),
         optional($.semicolon),
       ),
+
+    explain_statement: ($) =>
+      seq(
+        $.keyword_explain,
+        field("statement", choice(
+          $.select_statement,
+          $.journal_statement,
+          $.balances_statement,
+          $.print_statement,
+        )),
+      ),
+
+    keyword_explain: (_) => token(prec(1, /[Ee][Xx][Pp][Ll][Aa][Ii][Nn]/)),
 
     keyword_journal: (_) => token(prec(1, /[Jj][Oo][Uu][Rr][Nn][Aa][Ll]/)),
 
