@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install tree-sitter-cli
+        run: npm install -g "tree-sitter-cli@$(node -p "require('./package.json').devDependencies['tree-sitter-cli']")"
+
+      - name: Check generated parser is up-to-date
+        run: |
+          tree-sitter generate
+          git diff --exit-code src/
+
+      - name: Run tests
+        run: tree-sitter test
